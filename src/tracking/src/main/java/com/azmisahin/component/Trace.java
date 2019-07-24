@@ -5,6 +5,9 @@ package com.azmisahin.component;
  */
 public class Trace{
 
+    // Static
+    private static Writer write;
+
     /**
      * Trace
      */
@@ -16,6 +19,8 @@ public class Trace{
     private static void init(){
         
         // Instance Create
+        if(write == null)
+        write = new Writer();
     }
 
     /**
@@ -25,7 +30,7 @@ public class Trace{
      */
     public static String Debug(String message) {
         init();
-        return message;
+        return write.Write(message, TrackingState.Debug);
     }
 
     /**
@@ -35,7 +40,7 @@ public class Trace{
      */
     public static String Info(String message) {
         init();
-        return message;
+        return write.Write(message, TrackingState.Info);
     }
 
     /**
@@ -45,7 +50,7 @@ public class Trace{
      */
     public static String Warning(String message) {
         init();
-        return message;
+        return write.Write(message, TrackingState.Warning);
     }
 
     /**
@@ -55,6 +60,6 @@ public class Trace{
      */
     public static String Error(String message) {
         init();
-        return message;
+        return write.Write(message, TrackingState.Error);
     }
 }
