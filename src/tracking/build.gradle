@@ -19,3 +19,101 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
+
+// Define Assembly
+ def assemblyInfo = file('assembly.properties')
+
+// Assembly Information 
+def buildNumber = 1
+
+def versionPatch = 4
+def versionRevision = 3
+def versionMinor = 2
+def versionMajor = 1
+
+def versionName = '1.2.3.4'
+def productName = 'Tracking'
+
+
+// File OK
+if (assemblyInfo.canRead()) {
+
+    // Define properties
+    def Properties properties = new Properties()
+
+    // Load properties
+    properties.load(new FileInputStream(assemblyInfo))
+
+    // Properties read 
+    productName = properties['productName']
+
+    buildNumber = properties['buildNumber']
+
+    versionPatch = properties['versionPatch']
+    versionRevision = properties['versionRevision']
+    versionMinor = properties['versionMinor']
+    versionMajor = properties['versionMajor']
+
+    versionName = properties['versionName']
+    
+    // Progress Update Build
+    buildNumber = buildNumber.toInteger() + 1
+
+    // Progress Update Version
+
+    // Patch Update
+    versionPatch = versionPatch.toInteger() + 1
+    
+    // Patch
+    if(versionPatch > 9){
+        versionPatch = 0
+
+        // Revision Update
+        versionRevision = versionRevision.toInteger() + 1
+
+        // Revision
+        if(versionRevision > 9){
+            versionRevision = 0
+        
+            // Minor Update
+            versionMinor = versionMinor.toInteger() + 1
+
+            // Major
+            if(versionMajor > 9){
+
+                // Major Update
+                versionMajor = versionMajor.toInteger() + 1
+            }
+        }
+    }
+    versionName = "$versionMajor.$versionMinor.$versionRevision.$versionPatch"
+
+    // Properties update set 
+    properties['productName'] = productName.toString()
+
+    properties['buildNumber'] = buildNumber.toString()
+
+    properties['versionPatch'] = versionPatch.toString()
+    properties['versionRevision'] = versionRevision.toString()
+    properties['versionMinor'] = versionMinor.toString()
+    properties['versionMajor'] = versionMajor.toString()
+
+    properties['versionName'] = versionName.toString()
+
+
+    // Properties update write
+    properties.store(assemblyInfo.newWriter(), null)
+}
+    
+// Binary Version
+task binary(type: Copy, group: "version", description: "Copy source file") {
+    from "bin"
+    into "build/version/" + versionName
+}
+
+// Verison
+task version(dependsOn: [binary], type: Zip, group: "version", description: "Archives sources in a zip file") {
+    from "src"
+    destinationDir  file('build/version/')
+    setArchiveName versionName + ".zip"
+}
