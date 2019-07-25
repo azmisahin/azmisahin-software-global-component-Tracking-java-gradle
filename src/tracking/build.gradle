@@ -100,7 +100,6 @@ if (assemblyInfo.canRead()) {
 
     properties['versionName'] = versionName.toString()
 
-
     // Properties update write
     properties.store(assemblyInfo.newWriter(), null)
 }
@@ -117,3 +116,8 @@ task version(dependsOn: [binary], type: Zip, group: "version", description: "Arc
     destinationDir  file('build/version/')
     setArchiveName versionName + ".zip"
 }
+
+// Project Properties
+group = 'com.azmisahin.component'
+description = 'The code architecture allows a simple method to be monitored.'
+version = versionName
