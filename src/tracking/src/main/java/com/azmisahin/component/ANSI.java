@@ -2,8 +2,8 @@ package com.azmisahin.component;
 
 /**
  * ANSI
- * see {@link https://www.ansi.org/}
- * see {@link http://en.wikipedia.org/wiki/ANSI_escape_code}
+ * ref: https://www.ansi.org
+ * ref: http://en.wikipedia.org/wiki/ANSI_escape_code
  */
 public enum ANSI{
 
@@ -65,7 +65,8 @@ public enum ANSI{
     }
 
     /**
-     * Get Enum Value
+     * Get Text
+     * @return String this Enum Value
      */
     public String getText(){
 

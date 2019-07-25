@@ -20,3 +20,9 @@ Major.Minor.Revision.Patch
 ```
 gradle version
 ```
+
+## Documentation
+```
+gradle javadoc
+```
+build/docs

@@ -9,6 +9,7 @@ public class Writer{
      * Write a Message
      * @param message Message
      * @param state State
+     * @return String Text
      */
     public String Write(String message, TrackingState state){
         
