@@ -1,6 +1,6 @@
 # ![Logo](media/favicon.png)
 
-# com.azmisahin.tracking
+# Tracking component
 
 The code architecture allows a simple method to be monitored.
 
@@ -11,4 +11,12 @@ The code architecture allows a simple method to be monitored.
 
 ```cmd
 gradle init
+```
+
+## Automatic Version
+
+# 1.0.0.0
+Major.Minor.Revision.Patch
+```
+gradle version
 ```
